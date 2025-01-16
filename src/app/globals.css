@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ededed;
+  --foreground: #0a0a0a;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+textarea {
+  resize: none;
+}
+
+.top_selector {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 1.9rem;
+}
+
+.icon_size_theme {
+  font-size: 0.85rem;
+}
+
+.icon_size_loading {
+  font-size: 1.3rem;
+}
+
+.icon_size_clipboard {
+  font-size: 1.3rem;
+}
+
+.input_box_width {
+  width: 77%;
+}
+
+.input_box_margin {
+  margin-right: 3%;
+}
+
+.input_button_width {
+  width: 20%;
+}
+
+.button_disabled {
+  pointer-events: none;
+}
+
+@media (min-width: 1024px) {
+  .top_selector {
+    height: 2.3rem;
+  }
+
+  .icon_size_theme {
+    font-size: 1.0rem;
+  }
+
+  .icon_size_loading {
+    font-size: 1.54rem;
+  }
+
+  .icon_size_clipboard {
+    font-size: 1.54rem;
+  }
+}
+
+@layer components {
+  .mainarea_width {
+    @apply w-11/12 lg:w-3/4;
+  }
+  .textbox_visual {
+    @apply rounded-lg border border-solid border-slate-500 dark:border-white/[.145] bg-white dark:bg-slate-700 p-2 lg:p-3 focus:outline-none;
+  }
+  .button_visual {
+    @apply rounded-lg border border-solid transition-colors border-slate-500 dark:border-white/[.145] bg-white hover:bg-gray-200 disabled:hover:bg-white dark:bg-slate-700 dark:hover:bg-slate-500 dark:disabled:hover:bg-slate-700;
+  }
+  .button_width {
+    @apply min-w-32 lg:min-w-48
+  }
+  .button_height {
+    @apply h-8 lg:h-10;
+  }
+  .clipboard_notification {
+    @apply italic text-blue-600 dark:text-yellow-400;
+  }
+}

@@ -1,0 +1,12 @@
+{
+    "General": {
+        "page_title": "DIAGNOOSI APURI"
+    },
+    "InputPage": {
+        "openai_template": "Mitä toimenpiteitä suosittelet seuraavien oireiden hoitoon? Kerro myös onko syytä käydä lääkärin vastaanotolla. Oireet: ",
+        "request_wait": "Ole hyvä ja odota hetki...",
+        "request_error": "Haussa tapahtui virhe. Ole hyvä ja yritä uudestaan.",
+        "input_placeholder": "Ole hyvä ja kuvaile oireita",
+        "button_send": "Lähetä"
+    }
+}

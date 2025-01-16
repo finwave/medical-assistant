@@ -1,0 +1,12 @@
+{
+    "General": {
+        "page_title": "MEDICAL ASSISTANT"
+    },
+    "InputPage": {
+        "openai_template": "What measures do you recommend to treat the following symptoms? Also tell me if you should see a doctor. Symptoms: ",
+        "request_wait": "Please wait a moment...",
+        "request_error": "An error has occured. Please try again.",
+        "input_placeholder": "Please describe your symptoms",
+        "button_send": "Send"
+    }
+}
