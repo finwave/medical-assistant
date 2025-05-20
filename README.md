@@ -11,6 +11,7 @@ Features
 - Language can be selected (English, Finnish).
 - Automatically constructed ChatGPT queries based on the given symptoms (ailments) and currently selected language option.
 - Quick button action to copy the results (output) into your clipboard.
+- Client/server communication uses a simple custom REST API.
 
 ## Requirements
 Visual Studio Code  
