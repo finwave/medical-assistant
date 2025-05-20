@@ -7,6 +7,7 @@
         "request_wait": "Please wait a moment...",
         "request_error": "An error has occured. Please try again.",
         "input_placeholder": "Please describe your symptoms",
-        "button_send": "Send"
+        "button_send": "Send",
+        "clipboard_notification": "Copied to clipboard"
     }
 }

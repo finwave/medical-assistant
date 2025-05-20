@@ -7,6 +7,7 @@
         "request_wait": "Ole hyvä ja odota hetki...",
         "request_error": "Haussa tapahtui virhe. Ole hyvä ja yritä uudestaan.",
         "input_placeholder": "Ole hyvä ja kuvaile oireita",
-        "button_send": "Lähetä"
+        "button_send": "Lähetä",
+        "clipboard_notification": "Teksti on kopioitu"
     }
 }

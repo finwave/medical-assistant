@@ -13,9 +13,11 @@ type DictionaryProps = {
   request_error : string;
   input_placeholder : string;
   button_send : string;
+  clipboard_notification : string;
 };
 
-export default function InputRequest({ page_title, openai_template, request_wait, request_error, input_placeholder, button_send }: PropsWithChildren<DictionaryProps>) {
+export default function InputRequest({ page_title, openai_template, request_wait, request_error,
+  input_placeholder, button_send, clipboard_notification }: PropsWithChildren<DictionaryProps>) {
   const [mounted, setMounted] = useState(false)
   const [user_input, setUserInput] = useState('')
 
@@ -121,7 +123,7 @@ export default function InputRequest({ page_title, openai_template, request_wait
 
     if (desktopNotificationElement != null) {
       if (enable) {
-        desktopNotificationElement.innerText = "Copied to clipboard";
+        desktopNotificationElement.innerText = clipboard_notification;
       } else {
         desktopNotificationElement.innerText = "";
       }
@@ -129,7 +131,7 @@ export default function InputRequest({ page_title, openai_template, request_wait
 
     if (mobileNotificationElement != null) {
       if (enable) {
-        mobileNotificationElement.innerText = "Copied to clipboard";
+        mobileNotificationElement.innerText = clipboard_notification;
       } else {
         mobileNotificationElement.innerText = "";
       }
