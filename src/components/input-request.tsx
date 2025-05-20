@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import { IconContext } from "react-icons";
 import { CgSpinner } from "react-icons/cg";
 import { FaClipboardList } from "react-icons/fa";
+import axios from 'axios';
 
 type DictionaryProps = {
   page_title : string;
@@ -31,70 +32,125 @@ export default function InputRequest({ page_title, openai_template, request_wait
   }
 
   function sendRequest() {
-    if (user_input == null || user_input == '') {
+    if ((user_input == null) || (user_input == '')) {
       return;
     }
 
+    enableLoadingIcon(true);
+
+    let openai_input = openai_template;
+    openai_input = openai_input.concat(user_input);
+
+    // Establish Rest API request with MAMP local server (localhost).
+    axios.get('http://localhost:80//api.php', {
+      params: {
+        input: openai_input
+      }
+    })
+    .then(function (response) {
+      if (response.data) {
+        if (response.data.result) {
+          const output = response.data.result as string;
+          setOutputAreaText(output);
+        } else {
+          setOutputAreaText(request_error);
+        }
+      }
+    })
+    .catch(function (error) {
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+      } else if (error.request) {
+        // The request was made but no response was received
+        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+        // http.ClientRequest in node.js
+        console.log(error.request);
+      } else if (error.message) {
+        // Something happened in setting up the request that triggered an Error
+        console.log('Error', error.message);
+      }
+
+      if (error.config) {
+        console.log(error.config);
+      }
+
+      setOutputAreaText(request_error);
+    })
+    .finally(function () {
+      // always executed
+      enableLoadingIcon(false);
+    });
+  }
+
+  function setOutputAreaText(text: string) {
+    const outputElement = document.getElementById("request_output") as HTMLTextAreaElement;
+    outputElement.value = text;
+  }
+
+  function enableLoadingIcon(enable: boolean) {
     const sendButtonElement = document.getElementById("request_button") as HTMLButtonElement;
-    const enButtonElement = document.getElementById("button_language_en") as HTMLButtonElement;
-    const fiButtonElement = document.getElementById("button_language_fi") as HTMLButtonElement;
+    const enLanguageButtonElement = document.getElementById("button_language_en") as HTMLButtonElement;
+    const fiLanguageButtonElement = document.getElementById("button_language_fi") as HTMLButtonElement;
     const inputElement = document.getElementById("request_input") as HTMLInputElement;
     const outputElement = document.getElementById("request_output") as HTMLTextAreaElement;
     const loadingElement = document.getElementById("loading_icon");
 
-    if (loadingElement == null || sendButtonElement == null || enButtonElement == null || 
-        fiButtonElement == null || inputElement == null || outputElement == null) {
-      return;
-    }
-
-    sendButtonElement.classList.replace("opacity-100", "opacity-35");
-    sendButtonElement.classList.add("button_disabled");
-    enButtonElement.classList.add("button_disabled");
-    fiButtonElement.classList.add("button_disabled");
-    outputElement.classList.add("pl-9");
-    outputElement.classList.add("lg:pl-10");
-    outputElement.value = request_wait;
-    inputElement.disabled = true;
-    loadingElement.hidden = false;
-
-    const xmlhttp = new XMLHttpRequest();
-
-    // Establish POST request with MAMP local server (localhost).
-    xmlhttp.open("POST", "http://localhost:80//openai_request.php");
-
-    // Send the proper header information along with the request
-    xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-    xmlhttp.onreadystatechange = function() {
-      // Call a function when the state changes.
-      if (this.readyState === XMLHttpRequest.DONE) {
+    if (sendButtonElement) {
+      if (enable) {
+        sendButtonElement.classList.replace("opacity-100", "opacity-35");
+        sendButtonElement.classList.add("button_disabled");
+      } else {
         sendButtonElement.classList.replace("opacity-35", "opacity-100");
         sendButtonElement.classList.remove("button_disabled");
-        enButtonElement.classList.remove("button_disabled");
-        fiButtonElement.classList.remove("button_disabled");
-        outputElement.classList.remove("pl-9");
-        outputElement.classList.remove("lg:pl-10");
-        inputElement.disabled = false;
-        loadingElement.hidden = true;
-
-        if (this.status === 200) {
-          if (this.responseText === "ERROR") {
-            outputElement.value = request_error;
-          } else {
-            outputElement.value = this.responseText;
-          }
-        } else {
-          outputElement.value = request_error;
-        }
       }
     }
 
-    let openai_input = openai_template;
-    openai_input = openai_input.concat(user_input);
-    let request_body = "request=";
-    request_body = request_body.concat(openai_input);
+    if (enLanguageButtonElement) {
+      if (enable) {
+        enLanguageButtonElement.classList.add("button_disabled");
+      } else {
+        enLanguageButtonElement.classList.remove("button_disabled");
+      }
+    }
 
-    xmlhttp.send(request_body);
+    if (fiLanguageButtonElement) {
+      if (enable) {
+        fiLanguageButtonElement.classList.add("button_disabled");
+      } else {
+        fiLanguageButtonElement.classList.remove("button_disabled");
+      }
+    }
+
+    if (outputElement) {
+      if (enable) {
+        outputElement.classList.add("pl-9");
+        outputElement.classList.add("lg:pl-10");
+        outputElement.value = request_wait;
+      } else {
+        outputElement.classList.remove("pl-9");
+        outputElement.classList.remove("lg:pl-10");
+      }
+    }
+
+    if (inputElement) {
+      if (enable) {
+        inputElement.disabled = true;
+      } else {
+        inputElement.disabled = false;
+      }
+    }
+
+    if (loadingElement) {
+      if (enable) {
+        loadingElement.hidden = false;
+      } else {
+        loadingElement.hidden = true;
+      }
+    }
   }
 
   async function handleCopy() {
