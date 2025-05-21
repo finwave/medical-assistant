@@ -37,7 +37,7 @@ For this to work, you need your own OpenAI API key.
 https://platform.openai.com/settings/organization/api-keys
 
 Open the following source code file:  
-openai_request\openai_request.php
+server\openai.php
 
 Replace the following PHP code line with your own OpenAI API key:  
 $OPENAI_API_KEY = 'YOUR OPENAI API KEY HERE';
@@ -59,7 +59,7 @@ Open MAMP and select the following menu:
 MAMP -> Preferences -> Server -> Document Root
 
 Change the folder into the following one:  
-"this project"/server
+"this project"\server
 
 Remember to start the MAMP server by clicking the "Start Servers" button.
 
