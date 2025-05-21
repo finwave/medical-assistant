@@ -58,8 +58,8 @@ We need to change the default server document folder of MAMP.
 Open MAMP and select the following menu:  
 MAMP -> Preferences -> Server -> Document Root
 
-Change the folder into the following one:
-"this project"\openai_request
+Change the folder into the following one:  
+"this project"/server
 
 Remember to start the MAMP server by clicking the "Start Servers" button.
 
