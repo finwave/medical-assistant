@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--background: #ededed;
+	--foreground: #0a0a0a;
+}
+
+body {
+	color: var(--foreground);
+	background: var(--background);
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+textarea {
+	resize: none;
+}
+
+.page_area {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-width: 100%;
+	min-height: 100vh;
+	gap: 1.25rem;
+	padding: 3.5rem 0 1.25rem;
+}
+
+.header_area {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	min-width: 100%;
+	height: 2.6rem;
+	padding: 0 1rem;
+}
+
+.icon_padding_theme {
+	padding: 0.25rem;
+}
+
+.icon_size_theme {
+	font-size: 0.75rem;
+}
+
+.icon_size_loading {
+	font-size: 1.3rem;
+}
+
+.icon_size_clipboard {
+	font-size: 1.3rem;
+}
+
+.input_box_width {
+	width: 77%;
+}
+
+.input_box_margin {
+	margin-right: 3%;
+}
+
+.input_button_width {
+	width: 20%;
+}
+
+.button_disabled {
+	pointer-events: none;
+}
+
+.button-transparent {
+	background-color: transparent;
+	background-repeat: no-repeat;
+	border: none;
+	cursor: pointer;
+	overflow: hidden;
+	outline: none;
+	padding: 0.5rem 0.75rem;
+}
+
+@media (min-width: 1024px) {
+	.page_area {
+		gap: 2rem;
+		padding: 5rem 0 2.75rem;
+	}
+
+	.header_area {
+		height: 2.8rem;
+		padding: 0 2rem;
+	}
+
+	.icon_padding_theme {
+		padding: 0.4rem;
+	}
+
+	.icon_size_theme {
+		font-size: 0.85rem;
+	}
+
+	.icon_size_loading {
+		font-size: 1.54rem;
+	}
+
+	.icon_size_clipboard {
+		font-size: 1.54rem;
+	}
+
+	.button-transparent {
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+}
+
+@layer components {
+	.mainarea_width {
+		@apply w-11/12 lg:w-3/4;
+	}
+	.parameter_title {
+		@apply hidden lg:block -mt-2 mb-2 font-bold;
+	}
+	.textbox_visual {
+		@apply rounded-lg border border-solid border-slate-500 dark:border-white/[.145] bg-white dark:bg-slate-700 p-2 lg:p-3 focus:outline-none;
+	}
+	.button_visual {
+		@apply rounded-lg border border-solid transition-colors border-slate-500 dark:border-white/[.145] bg-white hover:bg-gray-200 disabled:hover:bg-white dark:bg-slate-700 dark:hover:bg-slate-500 dark:disabled:hover:bg-slate-700;
+	}
+	.button_width {
+		@apply min-w-32 lg:min-w-48;
+	}
+	.button_height {
+		@apply h-8 lg:h-10;
+	}
+	.clipboard_notification {
+		@apply italic text-blue-600 dark:text-yellow-400;
+	}
+}
