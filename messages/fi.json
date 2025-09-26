@@ -1,13 +1,15 @@
 {
-    "General": {
-        "page_title": "DIAGNOOSI APURI"
+    "Profile": {
+        "page_title": "PROFIILI"
     },
-    "InputPage": {
-        "openai_template": "Mitä toimenpiteitä suosittelet seuraavien oireiden hoitoon? Kerro myös onko syytä käydä lääkärin vastaanotolla. Oireet: ",
+    "Assistant": {
+        "page_title": "DIAGNOOSI APURI",
+        "openai_template": "Mitä toimenpiteitä suosittelet seuraavien oireiden hoitoon? Onko syytä käydä lääkärin vastaanotolla? Oireet: ",
         "request_wait": "Ole hyvä ja odota hetki...",
         "request_error": "Haussa tapahtui virhe. Ole hyvä ja yritä uudestaan.",
         "input_placeholder": "Ole hyvä ja kuvaile oireita",
         "button_send": "Lähetä",
-        "clipboard_notification": "Teksti on kopioitu"
+        "clipboard_notification": "Teksti on kopioitu",
+        "parameter_title_symptoms": "Terveysoireet"
     }
 }
