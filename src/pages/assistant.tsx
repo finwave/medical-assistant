@@ -1,36 +1,16 @@
 "use client"
 
-import { PropsWithChildren } from 'react';
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import {useTranslations} from 'next-intl';
 import { IconContext } from "react-icons";
 import { CgSpinner } from "react-icons/cg";
 import { FaClipboardList } from "react-icons/fa";
 import axios from 'axios';
 
-type DictionaryProps = {
-  page_title : string;
-  openai_template : string;
-  request_wait : string;
-  request_error : string;
-  input_placeholder : string;
-  button_send : string;
-  clipboard_notification : string;
-};
-
-export default function InputRequest({ page_title, openai_template, request_wait, request_error,
-  input_placeholder, button_send, clipboard_notification }: PropsWithChildren<DictionaryProps>) {
-  const [mounted, setMounted] = useState(false)
+export default function Assistant() {
   const [user_input, setUserInput] = useState('')
-
-  // useEffect only runs on the client, so now we can safely show the UI
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  if (!mounted) {
-    return null
-  }
-
+  const t_assistant = useTranslations('Assistant');
+  
   function sendRequest() {
     if ((user_input == null) || (user_input == '')) {
       return;
@@ -38,7 +18,7 @@ export default function InputRequest({ page_title, openai_template, request_wait
 
     enableLoadingIcon(true);
 
-    let openai_input = openai_template;
+    let openai_input = t_assistant('openai_template');
     openai_input = openai_input.concat(user_input);
 
     // Establish Rest API request with MAMP local server (localhost).
@@ -53,7 +33,7 @@ export default function InputRequest({ page_title, openai_template, request_wait
           const output = response.data.result as string;
           setOutputAreaText(output);
         } else {
-          setOutputAreaText(request_error);
+          setOutputAreaText(t_assistant('request_error'));
         }
       }
     })
@@ -78,7 +58,7 @@ export default function InputRequest({ page_title, openai_template, request_wait
         console.log(error.config);
       }
 
-      setOutputAreaText(request_error);
+      setOutputAreaText(t_assistant('request_error'));
     })
     .finally(function () {
       // always executed
@@ -129,7 +109,7 @@ export default function InputRequest({ page_title, openai_template, request_wait
       if (enable) {
         outputElement.classList.add("pl-9");
         outputElement.classList.add("lg:pl-10");
-        outputElement.value = request_wait;
+        outputElement.value = t_assistant('request_wait');
       } else {
         outputElement.classList.remove("pl-9");
         outputElement.classList.remove("lg:pl-10");
@@ -175,96 +155,74 @@ export default function InputRequest({ page_title, openai_template, request_wait
 
   function showClipboardNotification(enable : boolean) {
     const desktopNotificationElement = document.getElementById("clipboard_notification_desktop");
-    const mobileNotificationElement = document.getElementById("clipboard_notification_mobile");
 
     if (desktopNotificationElement != null) {
       if (enable) {
-        desktopNotificationElement.innerText = clipboard_notification;
+        desktopNotificationElement.innerText = t_assistant('clipboard_notification');
       } else {
         desktopNotificationElement.innerText = "";
-      }
-    }
-
-    if (mobileNotificationElement != null) {
-      if (enable) {
-        mobileNotificationElement.innerText = clipboard_notification;
-      } else {
-        mobileNotificationElement.innerText = "";
       }
     }
   }
 
   return (
     <>
-    <p className="font-black text-center text-2xl lg:text-4xl w-11/12 lg:w-2/4 lg:mb-8">
-      {page_title}
-    </p>
-    <div className="absolute inline lg:hidden top_selector top-2 left-2 lg:top-4 lg:left-4">
-      <button
-        id="clipboard_button_mobile"
-        className="button_visual p-2"
-        onClick={handleCopy}>
-        <div className="inline">
-          <IconContext.Provider value={{ className: "icon_size_theme" }}>
-          <FaClipboardList />
+      <p className="font-black text-center text-2xl lg:text-3xl">
+        {t_assistant('page_title')}
+      </p>
+      <div className="mainarea_width">
+        <div className="parameter_title">{t_assistant('parameter_title_symptoms')}</div>
+        <div className="relative flex flex-row items-center justify-center w-full">
+          <input
+            id="request_input"
+            className="textbox_visual button_height input_box_width input_box_margin"
+            value={user_input}
+            placeholder={t_assistant('input_placeholder')}
+            onChange={event => setUserInput(event.target.value)}
+            disabled={false} />
+          <button
+            id="request_button"
+            className="button_visual button_height input_button_width opacity-100"
+            onClick={sendRequest}
+            hidden={false} >
+            {t_assistant('button_send')}
+          </button>
+        </div>
+      </div>
+      <div className="mainarea_width flex-grow">
+        <div
+          id="clipboard_notification_desktop"
+          className="absolute hidden lg:inline -mt-7 clipboard_notification">
+        </div>
+        <div
+          id="loading_icon"
+          className="absolute pl-2 pt-2 lg:pl-2 lg:pt-3"
+          hidden={true}>
+          <IconContext.Provider value={{ className: "icon_size_loading" }}>
+            <CgSpinner className="animate-spin" />
           </IconContext.Provider>
         </div>
-      </button>
-      <div
-        id="clipboard_notification_mobile"
-        className="clipboard_notification pl-2">
+        <div
+          className="absolute hidden lg:inline ml-[-1.0rem] mt-2 lg:ml-[-3.25rem] lg:mt-3"
+          hidden={false}>
+          <button
+            id="clipboard_button_desktop"
+            className="button_visual p-2"
+            onClick={handleCopy}>
+            <div className="inline">
+              <IconContext.Provider value={{ className: "icon_size_clipboard" }}>
+              <FaClipboardList />
+              </IconContext.Provider>
+            </div>
+          </button>
+        </div>
+        <textarea readOnly
+          id="request_output"
+          className="textbox_visual w-full h-full"
+          value=""
+          placeholder=""
+          disabled={true} />
       </div>
-    </div>
-    <div className="relative flex flex-row items-center justify-center mainarea_width">
-      <div
-        id="clipboard_notification_desktop"
-        className="absolute hidden lg:inline top-[-2.25rem] left-0 clipboard_notification">
-      </div>
-      <input
-        id="request_input"
-        className="textbox_visual button_height input_box_width input_box_margin"
-        value={user_input}
-        placeholder={input_placeholder}
-        onChange={event => setUserInput(event.target.value)}
-        disabled={false} />
-      <button
-        id="request_button"
-        className="button_visual button_height input_button_width opacity-100"
-        onClick={sendRequest}
-        hidden={false} >
-        {button_send}
-      </button>
-    </div>
-    <div className="relative mainarea_width flex-grow">
-      <div
-        id="loading_icon"
-        className="absolute pl-2 pt-2 lg:pl-2 lg:pt-3"
-        hidden={true}>
-        <IconContext.Provider value={{ className: "icon_size_loading" }}>
-          <CgSpinner className="animate-spin" />
-        </IconContext.Provider>
-      </div>
-      <div
-        className="absolute hidden lg:inline ml-[-1.0rem] mt-2 lg:ml-[-3.25rem] lg:mt-3"
-        hidden={false}>
-        <button
-          id="clipboard_button_desktop"
-          className="flex flex-row items-center justify-center button_visual p-2"
-          onClick={handleCopy}>
-          <div className="inline">
-            <IconContext.Provider value={{ className: "icon_size_clipboard" }}>
-            <FaClipboardList />
-            </IconContext.Provider>
-          </div>
-        </button>
-      </div>
-      <textarea readOnly
-        id="request_output"
-        className="textbox_visual w-full h-full"
-        value=""
-        placeholder=""
-        disabled={true} />
-    </div>
     </>
   )
 }
