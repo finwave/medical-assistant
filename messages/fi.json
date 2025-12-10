@@ -1,6 +1,12 @@
 {
     "Profile": {
-        "page_title": "PROFIILI"
+        "page_title": "PROFIILI",
+        "parameter_title_genre": "Sukupuoli",
+        "parameter_title_age": "Ikä",
+        "parameter_option_select": "Valitse",
+        "parameter_option_genre_male": "Mies",
+        "parameter_option_genre_female": "Nainen",
+        "parameter_option_genre_other": "Muu"
     },
     "Assistant": {
         "page_title": "DIAGNOOSI APURI",

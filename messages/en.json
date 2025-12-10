@@ -1,6 +1,12 @@
 {
     "Profile": {
-        "page_title": "PROFILE"
+        "page_title": "PROFILE",
+        "parameter_title_genre": "Genre",
+        "parameter_title_age": "Age",
+        "parameter_option_select": "Select",
+        "parameter_option_genre_male": "Male",
+        "parameter_option_genre_female": "Female",
+        "parameter_option_genre_other": "Other"
     },
     "Assistant": {
         "page_title": "MEDICAL ASSISTANT",
