@@ -1,12 +1,15 @@
 {
     "Profile": {
         "page_title": "PROFIILI",
-        "parameter_title_genre": "Sukupuoli",
+        "parameter_title_gender": "Sukupuoli",
         "parameter_title_age": "Ikä",
         "parameter_option_select": "Valitse",
-        "parameter_option_genre_male": "Mies",
-        "parameter_option_genre_female": "Nainen",
-        "parameter_option_genre_other": "Muu"
+        "parameter_option_gender_male": "Mies",
+        "parameter_option_gender_female": "Nainen",
+        "parameter_option_gender_other": "Muu",
+        "button_save": "Tallenna",
+        "button_continue": "Jatka",
+        "save_notification": "Profiili tallennettu"
     },
     "Assistant": {
         "page_title": "DIAGNOOSI APURI",

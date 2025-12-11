@@ -1,13 +1,22 @@
 "use client";
 
 import { useState } from "react";
+import { PropsWithChildren } from "react";
 import { useTranslations } from "next-intl";
 import { IconContext } from "react-icons";
 import { CgSpinner } from "react-icons/cg";
 import { FaClipboardList } from "react-icons/fa";
 import axios from "axios";
 
-export default function Assistant() {
+type AssistantProps = {
+	savedProfileGender: number;
+	savedProfileAge: number;
+};
+
+export const Assistant = ({
+	savedProfileGender,
+	savedProfileAge,
+}: PropsWithChildren<AssistantProps>) => {
 	const [user_input, setUserInput] = useState("");
 	const t_assistant = useTranslations("Assistant");
 
@@ -45,18 +54,17 @@ export default function Assistant() {
 					console.log(error.response.data);
 					console.log(error.response.status);
 					console.log(error.response.headers);
-				} else if (error.request) {
-					// The request was made but no response was received
-					// `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-					// http.ClientRequest in node.js
-					console.log(error.request);
-				} else if (error.message) {
+				} else if (error.message || error.request) {
 					// Something happened in setting up the request that triggered an Error
-					console.log("Error", error.message);
-				}
-
-				if (error.config) {
-					console.log(error.config);
+					if (error.message) {
+						console.log("Error:", error.message);
+						// The request was made but no response was received
+						// `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+						// http.ClientRequest in node.js
+					}
+					if (error.request) {
+						console.log(error.request);
+					}
 				}
 
 				setOutputAreaText(t_assistant("request_error"));
@@ -210,7 +218,7 @@ export default function Assistant() {
 					/>
 					<button
 						id="request_button"
-						className="button_visual button_height input_button_width opacity-100"
+						className="button_visual input_button_width button_height opacity-100"
 						onClick={sendRequest}
 						hidden={false}
 					>
@@ -221,7 +229,7 @@ export default function Assistant() {
 			<div className="mainarea_width flex-grow">
 				<div
 					id="clipboard_notification_desktop"
-					className="absolute hidden lg:inline -mt-7 clipboard_notification"
+					className="absolute hidden lg:inline -mt-7 notification_visual"
 				></div>
 				<div
 					id="loading_icon"
@@ -263,4 +271,4 @@ export default function Assistant() {
 			</div>
 		</>
 	);
-}
+};

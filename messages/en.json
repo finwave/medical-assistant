@@ -1,12 +1,15 @@
 {
     "Profile": {
         "page_title": "PROFILE",
-        "parameter_title_genre": "Genre",
+        "parameter_title_gender": "Gender",
         "parameter_title_age": "Age",
         "parameter_option_select": "Select",
-        "parameter_option_genre_male": "Male",
-        "parameter_option_genre_female": "Female",
-        "parameter_option_genre_other": "Other"
+        "parameter_option_gender_male": "Male",
+        "parameter_option_gender_female": "Female",
+        "parameter_option_gender_other": "Other",
+        "button_save": "Save",
+        "button_continue": "Continue",
+        "save_notification": "Profile saved"
     },
     "Assistant": {
         "page_title": "MEDICAL ASSISTANT",

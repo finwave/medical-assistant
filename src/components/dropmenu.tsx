@@ -6,10 +6,16 @@ import { FaCaretDown } from "react-icons/fa";
 import { useTranslations } from "next-intl";
 
 type MenuProps = {
+	onParentHandleSelect: (index: number) => void;
+	savedIndex: number;
 	menuOptions: string[];
 };
 
-export const DropMenu = ({ menuOptions }: PropsWithChildren<MenuProps>) => {
+export const DropMenu = ({
+	onParentHandleSelect,
+	savedIndex,
+	menuOptions,
+}: PropsWithChildren<MenuProps>) => {
 	const t_profile = useTranslations("Profile");
 
 	const [isOpen, setIsOpen] = useState(false);
@@ -20,7 +26,8 @@ export const DropMenu = ({ menuOptions }: PropsWithChildren<MenuProps>) => {
 		setIsOpen(!isOpen);
 	};
 
-	const handleSelect = (index: number) => {
+	const onHandleSelect = (index: number) => {
+		onParentHandleSelect(index);
 		setOptionIndex(index);
 		setIsEmptyParameter(false);
 		setIsOpen(false);
@@ -31,14 +38,17 @@ export const DropMenu = ({ menuOptions }: PropsWithChildren<MenuProps>) => {
 			{/* Dropdown button */}
 			<button
 				type="button"
-				className=" inline-flex justify-center w-full
-                    rounded-md border border-gray-300
-                    shadow-sm px-4 py-2 bg-white text-sm
-                    font-medium text-black hover:bg-gray-50"
+				className="dropdown_menu_button"
 				onClick={toggleDropdown}
 			>
-				{isEmptyParameter && t_profile("parameter_option_select")}
-				{!isEmptyParameter && menuOptions[optionIndex]}
+				{isEmptyParameter && savedIndex >= 0
+					? menuOptions[savedIndex]
+					: isEmptyParameter && savedIndex < 0
+					? t_profile("parameter_option_select")
+					: !isEmptyParameter
+					? menuOptions[optionIndex]
+					: null}
+
 				<div className="icon_dropmenu">
 					<FaCaretDown />
 				</div>
@@ -46,21 +56,14 @@ export const DropMenu = ({ menuOptions }: PropsWithChildren<MenuProps>) => {
 
 			{/* Dropdown menu */}
 			{isOpen && (
-				<div
-					className=" origin-top-right absolute
-                      right-0 mt-2 w-full rounded-md
-                      shadow-lg bg-white ring-1 ring-black
-                      ring-opacity-5 focus:outline-none"
-				>
+				<div className="dropdown_menu_container">
 					<div className="py-1">
 						{menuOptions.map((parameter, index) => (
 							<a
 								key={index}
 								href="#"
-								className="block px-4 py-2
-                                               text-sm text-black
-                                               hover:bg-gray-100"
-								onClick={() => handleSelect(index)}
+								className="dropdown_menu_option"
+								onClick={() => onHandleSelect(index)}
 							>
 								{parameter}
 							</a>

@@ -41,8 +41,12 @@ textarea {
 	padding: 0 1rem;
 }
 
-.center_dropmenu {
+.horizontal_center {
 	margin: 0 auto;
+}
+
+.dropmenu_width {
+	width: 7rem;
 }
 
 .icon_dropmenu {
@@ -94,6 +98,19 @@ textarea {
 	padding: 0.5rem 0.75rem;
 }
 
+.profile_dropmenu_separator {
+	width: 3.6rem;
+}
+
+.profile_button_separator {
+	width: 2.5rem;
+}
+
+.parameter_title_dropmenu {
+	font-size: 1rem;
+	line-height: 1.5rem;
+}
+
 @media (min-width: 1024px) {
 	.page_area {
 		gap: 2rem;
@@ -125,11 +142,21 @@ textarea {
 		padding-left: 1rem;
 		padding-right: 1rem;
 	}
+
+	.profile_dropmenu_separator {
+		width: 7.2rem;
+	}
 }
 
 @layer components {
 	.mainarea_width {
 		@apply w-11/12 lg:w-3/4;
+	}
+	.profile_confirmation_area {
+		@apply flex flex-row items-start justify-center w-full;
+	}
+	.profile_selection_area {
+		@apply profile_confirmation_area h-80;
 	}
 	.parameter_title {
 		@apply hidden lg:block;
@@ -150,10 +177,16 @@ textarea {
 	.button_height {
 		@apply h-8 lg:h-10;
 	}
-	.clipboard_notification {
-		@apply italic text-blue-600 dark:text-yellow-400;
+	.dropdown_menu_button {
+		@apply inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-black hover:bg-gray-50;
 	}
-	.center_dropmenu {
-		@apply w-28;
+	.dropdown_menu_container {
+		@apply origin-top-right absolute right-0 mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none;
+	}
+	.dropdown_menu_option {
+		@apply block px-4 py-2 text-sm text-black hover:bg-gray-100;
+	}
+	.notification_visual {
+		@apply italic text-blue-600 dark:text-yellow-400;
 	}
 }
