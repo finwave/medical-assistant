@@ -169,7 +169,7 @@ textarea {
 		@apply rounded-lg border border-solid border-slate-500 dark:border-white/[.145] bg-white dark:bg-slate-700 p-2 lg:p-3 focus:outline-none;
 	}
 	.button_visual {
-		@apply font-bold rounded-lg border border-solid transition-colors border-slate-500 dark:border-white/[.145] bg-white hover:bg-gray-200 disabled:hover:bg-white dark:bg-slate-700 dark:hover:bg-slate-500 dark:disabled:hover:bg-slate-700;
+		@apply rounded-lg border border-solid transition-colors border-slate-500 dark:border-white/[.145] bg-white hover:bg-gray-200 disabled:hover:bg-white dark:bg-slate-700 dark:hover:bg-slate-500 dark:disabled:hover:bg-slate-700;
 	}
 	.button_width {
 		@apply min-w-32 lg:min-w-48;
