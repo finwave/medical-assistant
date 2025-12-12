@@ -35,10 +35,10 @@ export const DropMenu = ({
 
 	return (
 		<div className="relative inline-block w-full">
-			{/* Dropdown button */}
+			{/* Dropmenu button */}
 			<button
 				type="button"
-				className="dropdown_menu_button"
+				className="dropmenu_button"
 				onClick={toggleDropdown}
 			>
 				{isEmptyParameter && savedIndex >= 0
@@ -54,15 +54,16 @@ export const DropMenu = ({
 				</div>
 			</button>
 
-			{/* Dropdown menu */}
+			{/* Dropmenu content */}
 			{isOpen && (
-				<div className="dropdown_menu_container">
+				<div className="dropmenu_content">
 					<div className="py-1">
+						{/* Dropmenu items */}
 						{menuOptions.map((parameter, index) => (
 							<a
 								key={index}
 								href="#"
-								className="dropdown_menu_option"
+								className="dropmenu_item"
 								onClick={() => onHandleSelect(index)}
 							>
 								{parameter}

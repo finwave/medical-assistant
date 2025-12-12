@@ -1,5 +1,7 @@
 "use client";
 
+import "@/styles/profile.css";
+
 import { PropsWithChildren } from "react";
 import { useTranslations } from "next-intl";
 import { DropMenu } from "@/components/dropmenu";
@@ -64,7 +66,7 @@ export const Profile = ({
 						<div className="parameter_title_dropmenu text-center">
 							{t_profile("parameter_title_gender")}
 						</div>
-						<div className="horizontal_center dropmenu_width">
+						<div className="horizontal_center profile_dropmenu_width">
 							<DropMenu
 								onParentHandleSelect={
 									onParentProfileGenderSelect
@@ -80,7 +82,7 @@ export const Profile = ({
 						<div className="parameter_title_dropmenu text-center">
 							{t_profile("parameter_title_age")}
 						</div>
-						<div className="horizontal_center dropmenu_width">
+						<div className="horizontal_center profile_dropmenu_width">
 							<DropMenu
 								onParentHandleSelect={onParentProfileAgeSelect}
 								savedIndex={savedProfileAge}

@@ -1,0 +1,29 @@
+.icon_size_loading {
+	font-size: 1.3rem;
+}
+
+.icon_size_clipboard {
+	font-size: 1.3rem;
+}
+
+.input_box_width {
+	width: 77%;
+}
+
+.input_box_margin {
+	margin-right: 3%;
+}
+
+.input_button_width {
+	width: 20%;
+}
+
+@media (min-width: 1024px) {
+	.icon_size_loading {
+		font-size: 1.54rem;
+	}
+
+	.icon_size_clipboard {
+		font-size: 1.54rem;
+	}
+}

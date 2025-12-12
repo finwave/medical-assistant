@@ -1,5 +1,7 @@
 "use client";
 
+import "@/styles/assistant.css";
+
 import { useState } from "react";
 import { PropsWithChildren } from "react";
 import { useTranslations } from "next-intl";
@@ -8,6 +10,7 @@ import { CgSpinner } from "react-icons/cg";
 import { FaClipboardList } from "react-icons/fa";
 import { ProfileGenderTids } from "@/data/profile_data";
 import { ProfileAgeValues } from "@/data/profile_data";
+
 import axios from "axios";
 
 type AssistantProps = {

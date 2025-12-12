@@ -45,10 +45,6 @@ textarea {
 	margin: 0 auto;
 }
 
-.dropmenu_width {
-	width: 7rem;
-}
-
 .icon_dropmenu {
 	display: flex;
 	align-items: center;
@@ -64,26 +60,6 @@ textarea {
 	font-size: 0.75rem;
 }
 
-.icon_size_loading {
-	font-size: 1.3rem;
-}
-
-.icon_size_clipboard {
-	font-size: 1.3rem;
-}
-
-.input_box_width {
-	width: 77%;
-}
-
-.input_box_margin {
-	margin-right: 3%;
-}
-
-.input_button_width {
-	width: 20%;
-}
-
 .button_disabled {
 	pointer-events: none;
 }
@@ -96,14 +72,6 @@ textarea {
 	overflow: hidden;
 	outline: none;
 	padding: 0.5rem 0.75rem;
-}
-
-.profile_dropmenu_separator {
-	width: 3.6rem;
-}
-
-.profile_button_separator {
-	width: 2.5rem;
 }
 
 .parameter_title_dropmenu {
@@ -130,33 +98,15 @@ textarea {
 		font-size: 0.85rem;
 	}
 
-	.icon_size_loading {
-		font-size: 1.54rem;
-	}
-
-	.icon_size_clipboard {
-		font-size: 1.54rem;
-	}
-
 	.button-transparent {
 		padding-left: 1rem;
 		padding-right: 1rem;
-	}
-
-	.profile_dropmenu_separator {
-		width: 7.2rem;
 	}
 }
 
 @layer components {
 	.mainarea_width {
 		@apply w-11/12 lg:w-3/4;
-	}
-	.profile_confirmation_area {
-		@apply flex flex-row items-start justify-center w-full;
-	}
-	.profile_selection_area {
-		@apply profile_confirmation_area h-80;
 	}
 	.parameter_title {
 		@apply hidden lg:block;
@@ -177,13 +127,13 @@ textarea {
 	.button_height {
 		@apply h-8 lg:h-10;
 	}
-	.dropdown_menu_button {
+	.dropmenu_button {
 		@apply inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-black hover:bg-gray-50;
 	}
-	.dropdown_menu_container {
+	.dropmenu_content {
 		@apply origin-top-right absolute right-0 mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none;
 	}
-	.dropdown_menu_option {
+	.dropmenu_item {
 		@apply block px-4 py-2 text-sm text-black hover:bg-gray-100;
 	}
 	.notification_visual {

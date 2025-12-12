@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.profile_dropmenu_width {
+	width: 7rem;
+}
+
+.profile_dropmenu_separator {
+	width: 3.6rem;
+}
+
+.profile_button_separator {
+	width: 2.5rem;
+}
+
+@media (min-width: 1024px) {
+	.profile_dropmenu_separator {
+		width: 7.2rem;
+	}
+}
+
+@layer components {
+	.profile_confirmation_area {
+		@apply flex flex-row items-start justify-center w-full;
+	}
+	.profile_selection_area {
+		@apply profile_confirmation_area h-80;
+	}
+}
