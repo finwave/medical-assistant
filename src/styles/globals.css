@@ -115,26 +115,28 @@ textarea {
 	.parameter_title_dropmenu {
 		@apply mt-2 mb-2 font-bold;
 	}
-	.textbox_visual {
-		@apply rounded-lg border border-solid border-slate-500 dark:border-white/[.145] bg-white dark:bg-slate-700 p-2 lg:p-3 focus:outline-none;
-	}
-	.button_visual {
-		@apply rounded-lg border border-solid transition-colors border-slate-500 dark:border-white/[.145] bg-white hover:bg-gray-200 disabled:hover:bg-white dark:bg-slate-700 dark:hover:bg-slate-500 dark:disabled:hover:bg-slate-700;
-	}
 	.button_width {
 		@apply min-w-32 lg:min-w-48;
 	}
 	.button_height {
 		@apply h-8 lg:h-10;
 	}
+	.button_visual,
 	.dropmenu_button {
-		@apply inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-black hover:bg-gray-50;
+		@apply rounded-lg border border-solid transition-colors border-slate-500 dark:border-white/[.145] bg-white hover:bg-gray-200 disabled:hover:bg-white dark:bg-slate-700 dark:hover:bg-slate-500 dark:disabled:hover:bg-slate-700;
+	}
+	.dropmenu_button {
+		@apply inline-flex justify-center w-full px-4 py-2 rounded-md text-sm font-medium;
+	}
+	.textbox_visual,
+	.dropmenu_content {
+		@apply rounded-lg border border-solid border-slate-500 dark:border-white/[.145] bg-white dark:bg-slate-700 p-2 lg:p-3 focus:outline-none;
 	}
 	.dropmenu_content {
-		@apply origin-top-right absolute right-0 mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none;
+		@apply origin-top-right absolute right-0 mt-2 p-0 w-full rounded-md;
 	}
 	.dropmenu_item {
-		@apply block px-4 py-2 text-sm text-black hover:bg-gray-100;
+		@apply block px-4 py-2 text-sm transition-colors hover:bg-gray-200 dark:hover:bg-slate-500;
 	}
 	.notification_visual {
 		@apply italic text-blue-600 dark:text-yellow-400;
