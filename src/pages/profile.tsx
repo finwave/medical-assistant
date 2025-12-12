@@ -3,6 +3,8 @@
 import { PropsWithChildren } from "react";
 import { useTranslations } from "next-intl";
 import { DropMenu } from "@/components/dropmenu";
+import { ProfileGenderTids } from "@/data/profile_data";
+import { ProfileAgeValues } from "@/data/profile_data";
 
 type ProfileProps = {
 	onParentProfileSave: () => void;
@@ -24,18 +26,9 @@ export const Profile = ({
 	const t_profile = useTranslations("Profile");
 
 	const genderOptions = [
-		t_profile("parameter_option_gender_male"),
-		t_profile("parameter_option_gender_female"),
-		t_profile("parameter_option_gender_other"),
-	];
-
-	const ageOptions = [
-		"0 - 9",
-		"10 - 19",
-		"20 - 29",
-		"30 - 39",
-		"40 - 49",
-		"50+",
+		t_profile(ProfileGenderTids[0]),
+		t_profile(ProfileGenderTids[1]),
+		t_profile(ProfileGenderTids[2]),
 	];
 
 	async function handleProfileSave() {
@@ -91,7 +84,7 @@ export const Profile = ({
 							<DropMenu
 								onParentHandleSelect={onParentProfileAgeSelect}
 								savedIndex={savedProfileAge}
-								menuOptions={ageOptions}
+								menuOptions={ProfileAgeValues}
 							/>
 						</div>
 					</div>

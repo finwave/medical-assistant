@@ -6,6 +6,8 @@ import { useTranslations } from "next-intl";
 import { IconContext } from "react-icons";
 import { CgSpinner } from "react-icons/cg";
 import { FaClipboardList } from "react-icons/fa";
+import { ProfileGenderTids } from "@/data/profile_data";
+import { ProfileAgeValues } from "@/data/profile_data";
 import axios from "axios";
 
 type AssistantProps = {
@@ -18,7 +20,15 @@ export const Assistant = ({
 	savedProfileAge,
 }: PropsWithChildren<AssistantProps>) => {
 	const [user_input, setUserInput] = useState("");
+
 	const t_assistant = useTranslations("Assistant");
+	const t_profile = useTranslations("Profile");
+
+	const genderOptions = [
+		t_profile(ProfileGenderTids[0]),
+		t_profile(ProfileGenderTids[1]),
+		t_profile(ProfileGenderTids[2]),
+	];
 
 	function sendRequest() {
 		if (user_input == null || user_input == "") {
@@ -27,8 +37,38 @@ export const Assistant = ({
 
 		enableLoadingIcon(true);
 
-		let openai_input = t_assistant("openai_template");
+		let openai_input = t_assistant("openai_input_request");
+		openai_input = openai_input.concat(
+			t_assistant("openai_input_symptoms")
+		);
 		openai_input = openai_input.concat(user_input);
+
+		if (savedProfileGender >= 0 || savedProfileAge >= 0) {
+			openai_input = openai_input.concat(" - ");
+			openai_input = openai_input.concat(
+				t_assistant("openai_input_patient_info")
+			);
+
+			if (savedProfileGender >= 0) {
+				openai_input = addToRequestString(
+					openai_input,
+					t_profile("parameter_title_gender"),
+					genderOptions[savedProfileGender]
+				);
+			}
+
+			if (savedProfileGender >= 0 && savedProfileAge >= 0) {
+				openai_input = openai_input.concat(",");
+			}
+
+			if (savedProfileAge >= 0) {
+				openai_input = addToRequestString(
+					openai_input,
+					t_profile("parameter_title_age"),
+					ProfileAgeValues[savedProfileAge]
+				);
+			}
+		}
 
 		// Establish Rest API request with MAMP local server (localhost).
 		axios
@@ -55,15 +95,15 @@ export const Assistant = ({
 					console.log(error.response.status);
 					console.log(error.response.headers);
 				} else if (error.message || error.request) {
-					// Something happened in setting up the request that triggered an Error
 					if (error.message) {
+						// Something happened in setting up the request that triggered an Error
 						console.log("Error:", error.message);
+					}
+					if (error.request) {
 						// The request was made but no response was received
 						// `error.request` is an instance of XMLHttpRequest in the browser and an instance of
 						// http.ClientRequest in node.js
-					}
-					if (error.request) {
-						console.log(error.request);
+						//console.log(error.request);
 					}
 				}
 
@@ -75,6 +115,18 @@ export const Assistant = ({
 			});
 	}
 
+	function addToRequestString(
+		openai_input: string,
+		title: string,
+		value: string
+	): string {
+		openai_input = openai_input.concat(" ");
+		openai_input = openai_input.concat(title.toLowerCase());
+		openai_input = openai_input.concat(" ");
+		openai_input = openai_input.concat(value.toLowerCase());
+		return openai_input;
+	}
+
 	function setOutputAreaText(text: string) {
 		const outputElement = document.getElementById(
 			"request_output"
@@ -83,14 +135,20 @@ export const Assistant = ({
 	}
 
 	function enableLoadingIcon(enable: boolean) {
-		const sendButtonElement = document.getElementById(
-			"request_button"
+		const headerProfileButtonElement = document.getElementById(
+			"button_header_profile"
+		) as HTMLButtonElement;
+		const headerAssistantButtonElement = document.getElementById(
+			"button_header_assistant"
 		) as HTMLButtonElement;
 		const enLanguageButtonElement = document.getElementById(
 			"button_language_en"
 		) as HTMLButtonElement;
 		const fiLanguageButtonElement = document.getElementById(
 			"button_language_fi"
+		) as HTMLButtonElement;
+		const sendButtonElement = document.getElementById(
+			"request_button"
 		) as HTMLButtonElement;
 		const inputElement = document.getElementById(
 			"request_input"
@@ -99,6 +157,38 @@ export const Assistant = ({
 			"request_output"
 		) as HTMLTextAreaElement;
 		const loadingElement = document.getElementById("loading_icon");
+
+		if (headerProfileButtonElement) {
+			if (enable) {
+				headerProfileButtonElement.classList.add("button_disabled");
+			} else {
+				headerProfileButtonElement.classList.remove("button_disabled");
+			}
+		}
+		if (headerAssistantButtonElement) {
+			if (enable) {
+				headerAssistantButtonElement.classList.add("button_disabled");
+			} else {
+				headerAssistantButtonElement.classList.remove(
+					"button_disabled"
+				);
+			}
+		}
+
+		if (enLanguageButtonElement) {
+			if (enable) {
+				enLanguageButtonElement.classList.add("button_disabled");
+			} else {
+				enLanguageButtonElement.classList.remove("button_disabled");
+			}
+		}
+		if (fiLanguageButtonElement) {
+			if (enable) {
+				fiLanguageButtonElement.classList.add("button_disabled");
+			} else {
+				fiLanguageButtonElement.classList.remove("button_disabled");
+			}
+		}
 
 		if (sendButtonElement) {
 			if (enable) {
@@ -113,22 +203,6 @@ export const Assistant = ({
 					"opacity-100"
 				);
 				sendButtonElement.classList.remove("button_disabled");
-			}
-		}
-
-		if (enLanguageButtonElement) {
-			if (enable) {
-				enLanguageButtonElement.classList.add("button_disabled");
-			} else {
-				enLanguageButtonElement.classList.remove("button_disabled");
-			}
-		}
-
-		if (fiLanguageButtonElement) {
-			if (enable) {
-				fiLanguageButtonElement.classList.add("button_disabled");
-			} else {
-				fiLanguageButtonElement.classList.remove("button_disabled");
 			}
 		}
 
@@ -212,7 +286,7 @@ export const Assistant = ({
 						id="request_input"
 						className="textbox_visual button_height input_box_width input_box_margin"
 						value={user_input}
-						placeholder={t_assistant("input_placeholder")}
+						placeholder={t_assistant("user_input_placeholder")}
 						onChange={(event) => setUserInput(event.target.value)}
 						disabled={false}
 					/>

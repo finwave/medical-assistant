@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Page } from "@/types/enums";
 import { Profile } from "@/pages/profile";
 import { Assistant } from "@/pages/assistant";
+import { Page } from "@/types/enums";
 import HeaderMenu from "@/app/header";
 
 export default function Builder() {

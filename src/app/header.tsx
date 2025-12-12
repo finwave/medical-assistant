@@ -13,12 +13,14 @@ export default function HeaderMenu(props: any) {
 		<div className="bg-gray-300 dark:bg-gray-800 header_area">
 			<div className="space-x-2 lg:space-x-3 -ml-3 lg:-ml-4">
 				<button
+					id="button_header_profile"
 					className="button-transparent"
 					onClick={() => setMenuValue(Page.Profile)}
 				>
 					Profile
 				</button>
 				<button
+					id="button_header_assistant"
 					className="button-transparent"
 					onClick={() => setMenuValue(Page.Assistant)}
 				>
