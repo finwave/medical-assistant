@@ -13,7 +13,7 @@
     },
     "Assistant": {
         "page_title": "MEDICAL ASSISTANT",
-        "openai_input_request": "What treatments would you recommend for the following health symptoms? Would you recommended seeing a doctor? ",
+        "openai_input_request": "What measures do you recommend for treating the following symptoms? Is it recommended to see a doctor? ",
         "openai_input_symptoms": "Symptoms: ",
         "openai_input_patient_info": "Patient info:",
         "request_wait": "Please wait a moment...",
