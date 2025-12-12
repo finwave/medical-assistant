@@ -1,5 +1,5 @@
 # medical-assistant
-![Image](https://github.com/user-attachments/assets/5e0e38f9-067a-4024-9fa9-aa822af33591)
+![Image](https://github.com/user-attachments/assets/ada4aa2b-198a-4b02-b46d-4d7fc1d9d143)
 
 Next.js application that uses ChatGPT API for queries. You can input one or more symptoms (ailments) and the application asks advice from ChatGPT. The results are shown and can be copied to clipboard for further usage.
 
