@@ -4,7 +4,7 @@ import "@/styles/profile.css";
 
 import { PropsWithChildren } from "react";
 import { useTranslations } from "next-intl";
-import { DropMenu } from "@/components/dropmenu";
+import { ProfileDropMenu } from "@/components/profile-dropmenu";
 import { ProfileGenderTids } from "@/data/profile_data";
 import { ProfileAgeValues } from "@/data/profile_data";
 
@@ -62,34 +62,20 @@ export const Profile = ({
 			<div className="mainarea_width">
 				<div className="profile_selection_area">
 					{/* Gender menu */}
-					<div>
-						<div className="parameter_title_dropmenu text-center">
-							{t_profile("parameter_title_gender")}
-						</div>
-						<div className="horizontal_center profile_dropmenu_width">
-							<DropMenu
-								onParentHandleSelect={
-									onParentProfileGenderSelect
-								}
-								savedIndex={savedProfileGender}
-								menuOptions={genderOptions}
-							/>
-						</div>
-					</div>
+					<ProfileDropMenu
+						title={t_profile("parameter_title_gender")}
+						savedIndex={savedProfileGender}
+						menuOptions={genderOptions}
+						onParentHandleSelect={onParentProfileGenderSelect}
+					/>
 					<div className="profile_dropmenu_separator"></div>
 					{/* Age menu */}
-					<div>
-						<div className="parameter_title_dropmenu text-center">
-							{t_profile("parameter_title_age")}
-						</div>
-						<div className="horizontal_center profile_dropmenu_width">
-							<DropMenu
-								onParentHandleSelect={onParentProfileAgeSelect}
-								savedIndex={savedProfileAge}
-								menuOptions={ProfileAgeValues}
-							/>
-						</div>
-					</div>
+					<ProfileDropMenu
+						title={t_profile("parameter_title_age")}
+						savedIndex={savedProfileAge}
+						menuOptions={ProfileAgeValues}
+						onParentHandleSelect={onParentProfileAgeSelect}
+					/>
 				</div>
 			</div>
 			<div className="mainarea_width flex-grow">

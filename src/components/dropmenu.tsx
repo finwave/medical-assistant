@@ -34,7 +34,7 @@ export const DropMenu = ({
 	};
 
 	return (
-		<div className="relative inline-block w-full">
+		<>
 			{/* Dropmenu button */}
 			<button
 				type="button"
@@ -72,6 +72,6 @@ export const DropMenu = ({
 					</div>
 				</div>
 			)}
-		</div>
+		</>
 	);
 };

@@ -2,12 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
-.profile_dropmenu_width {
+.profile_selection_area {
+	padding-top: 1.25rem;
+}
+
+.profile_confirmation_area {
+	padding-top: 1.75rem;
+}
+
+.profile_dropmenu_title,
+.profile_dropmenu_content {
 	width: 7rem;
 }
 
+.profile_dropmenu_title {
+	text-align: center;
+	font-weight: bold;
+	font-size: 1rem;
+	padding-top: 0;
+	padding-bottom: 0;
+	line-height: 1.89rem;
+}
+
+.profile_dropmenu_title_gap {
+	width: 0rem;
+}
+
+.profile_dropmenu_content {
+	display: inline-block;
+}
+
 .profile_dropmenu_separator {
-	width: 3.6rem;
+	height: 0.8rem;
 }
 
 .profile_button_separator {
@@ -15,16 +41,34 @@
 }
 
 @media (min-width: 1024px) {
+	.profile_selection_area {
+		padding-top: 1.25rem;
+	}
+
+	.profile_confirmation_area {
+		padding-top: 2.5rem;
+	}
+
+	.profile_dropmenu_title {
+		padding-top: 0.5rem;
+		padding-bottom: 0.5rem;
+		line-height: 1.25rem;
+	}
+
+	.profile_dropmenu_title_gap {
+		width: 0rem;
+	}
+
 	.profile_dropmenu_separator {
-		width: 7.2rem;
+		height: 1rem;
 	}
 }
 
 @layer components {
+	.profile_selection_area {
+		@apply flex flex-col items-center justify-start w-full;
+	}
 	.profile_confirmation_area {
 		@apply flex flex-row items-start justify-center w-full;
-	}
-	.profile_selection_area {
-		@apply profile_confirmation_area h-80;
 	}
 }
